@@ -57,6 +57,7 @@ function generateUI(parameter, label, help, external, modelExternal) {
     'type',
     'label',
     'propType',
+    'noEmpty',
   ];
 
   Object.keys(parameter).forEach((key) => {
@@ -332,7 +333,7 @@ export default function generateDataModel(
         // OR prop
         paramAttr.forEach((orAttr) => {
           const keepTitle =
-            model.definitions[attrName].parameters.length - 1 === idx;
+            false && model.definitions[attrName].parameters.length - 1 === idx;
           const orCtx = {
             show: getShowFunction(model, attrName, orAttr),
             contents,
