@@ -40,6 +40,7 @@ export default class Simput extends React.Component {
     this.saveModel = this.saveModel.bind(this);
     this.parseFile = this.parseFile.bind(this);
     this.convertModel = this.convertModel.bind(this);
+    this.downloadOutputFiles = this.downloadOutputFiles.bind(this);
     this.downloadFile = this.downloadFile.bind(this);
     this.updateActive = this.updateActive.bind(this);
     this.updateViewData = this.updateViewData.bind(this);
@@ -49,7 +50,7 @@ export default class Simput extends React.Component {
   saveModel() {
     this.downloadFile(
       JSON.stringify(this.state.fullData, null, 2),
-      this.state.fullData.type
+      `${this.state.fullData.type}.json`
     );
   }
 
@@ -115,6 +116,26 @@ export default class Simput extends React.Component {
     }
   }
 
+  downloadOutputFiles() {
+    if (!this.props.convert) {
+      console.log(
+        `There is no convert function for "${this.state.fullData.type}"`
+      );
+      return;
+    }
+
+    const results = this.props.convert(this.state.fullData);
+
+    if (!results.error) {
+      Object.keys(results.results).forEach((key, index) => {
+        this.downloadFile(results.results[key], key);
+      });
+    } else {
+      console.log('There was an error converting: ');
+      console.log(results.error.message);
+    }
+  }
+
   // contents is a string here.
   /* eslint-disable class-methods-use-this */
   downloadFile(contents, type) {
@@ -125,7 +146,7 @@ export default class Simput extends React.Component {
     const downloadLink = document.getElementById('file-download-link');
 
     downloadLink.href = downloadURL;
-    downloadLink.download = `${type}.json`;
+    downloadLink.download = `${type}`;
     downloadLink.click();
 
     // Free memory
@@ -218,6 +239,12 @@ export default class Simput extends React.Component {
               <span className={style.buttonText}>Download Model</span>
               <i className={style.saveIcon} />
             </button>
+
+            <button className={style.button} onClick={this.downloadOutputFiles}>
+              <span className={style.buttonText}>Download Config Files</span>
+              <i className={style.saveIcon} />
+            </button>
+
             <button
               className={style.button}
               onClick={this.convertModel}
