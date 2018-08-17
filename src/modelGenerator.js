@@ -58,6 +58,7 @@ function generateUI(parameter, label, help, external, modelExternal) {
     'label',
     'propType',
     'noEmpty',
+    'componentLabels',
   ];
 
   Object.keys(parameter).forEach((key) => {
