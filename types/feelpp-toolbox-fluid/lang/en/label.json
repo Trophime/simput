@@ -1,0 +1,101 @@
+{
+    "views": {
+        "discretization":"Discretization",
+        "models": "Models",
+        "parameters": "Parameters",
+        "materials": "Materials",
+        "boundaryconditions": "Boundary Conditions",
+        "postprocess_exports": "Post-Processing Exports",
+        "postprocess_measures": "Post-Processing Measures"
+    },
+    "attributes": {
+        "discretization":
+        {
+            "parameters": {
+                "dim":"Dimension","discretization":"Discretization"
+            }
+        },
+
+        "models":
+        {
+            "parameters": {
+                "name":"model"
+            }
+        },
+        "parameters":
+        {
+            "parameters": {
+                "parameters.map":"Parameters"
+            }
+        },
+        "materials":
+        {
+            "title":"Materials",
+            "parameters": {
+                "name":"Name",
+                "markers":"Mesh Markers"
+            }
+        },
+        "materials_properties":
+        {
+            "title":"Materials Prop",
+            "parameters": { "density":"Density", "viscosity_law":"Viscosity Law" }
+        },
+        "materials_viscosity_newtonian":
+        {
+            "title":"Materials Newtonian",
+            "parameters": { "mu":"Dynamic Viscosity" }
+        },
+        "materials_viscosity_power-law":
+        {
+            "title":"Materials Power-Law",
+            "parameters": { "k":"k", "n":"n", "muMin":"mu min", "muMax":"mu max" }
+        },
+        "materials_viscosity_carreau":
+        {
+            "title":"Materials Carreau",
+            "parameters": { "lambda":"lambda","n":"n", "mu0":"mu_0", "muInf":"mu_inf" }
+        },
+        "materials_viscosity_carreau-yasuda":
+        {
+            "title":"Materials Carreau-Yasuda",
+            "parameters": { "lambda":"lambda","n":"n","a":"a", "mu0":"mu_0", "muInf":"mu_inf" }
+        },
+
+        "boundaryconditions":
+        {
+            "title":"Boundary Conditions",
+            "parameters": { "name":" Name","markers":"Mesh Markers","type":"Type" }
+        },
+        "boundaryconditions_velocityImposed":
+        {
+            "parameters": { "expr":"Expression" }
+        },
+        "boundaryconditions_inlet":
+        {
+            "parameters": { "profile":"Profile", "control":"Control", "expr":"Expression" }
+        },
+        "boundaryconditions_outlet":
+        {
+            "parameters": { "model":"Outlet Model" }
+        },
+        "boundaryconditions_outlet_windkessel":
+        {
+            "parameters": { "Rd":"Rd","Rp":"Rp","Cd":"Cd","coupling":"Coupling" }
+        },
+
+        "postprocess_measures":
+        {
+            "title":"Post-Processing Measures",
+            "parameters": { "name":"Name","type":"Type" }
+        },
+        "postprocess_exports":
+        {
+            "title":"Post-Processing Exports",
+            "parameters": { "type":"Type","type2":"Type2" }
+        }
+
+
+    }
+
+}
