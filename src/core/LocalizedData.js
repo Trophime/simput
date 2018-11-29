@@ -59,6 +59,7 @@ export default class LocalizedLabels {
   getHelp(attributeName, parameterId) {
     if (
       this.lang in this.allLanguages &&
+      this.allLanguages[this.lang].help &&
       this.allLanguages[this.lang].help[attributeName]
     ) {
       return this.allLanguages[this.lang].help[attributeName][parameterId];
