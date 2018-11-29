@@ -72,4 +72,15 @@ export default [
   //     data: {},
   //   },
   // },
+
+  {
+    label: 'Feel++-Toolbox fluid',
+    icon: 'flight',
+    description: 'PyFR is an open-source Python based framework for solving advection-diffusion type problems on streaming architectures using the Flux Reconstruction approach of Huynh.',
+    acknowledgement: 'Example by Kitware Inc.',
+    model: {
+      type: 'feelpp_toolbox_fluid_simput',
+      data: {},
+    },
+  },
 ];
