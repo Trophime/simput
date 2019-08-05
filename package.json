@@ -10,13 +10,13 @@
   ],
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/kitware/simput.git"
+    "url": "git+https://github.com/Trophime/simput.git"
   },
   "license": "BSD-3-Clause",
   "bugs": {
-    "url": "https://github.com/kitware/simput/issues"
+    "url": "https://github.com/Trophime/simput/issues"
   },
-  "homepage": "https://github.com/kitware/simput#readme",
+  "homepage": "https://github.com/Trophime/simput#readme",
   "scripts": {
     "validate": "prettier --config ./prettier.config.js --list-different \"src/**/*.js\"",
     "reformat": "prettier --config ./prettier.config.js --write \"src/**/*.js\"",
@@ -44,7 +44,7 @@
     "type:feelpp-toolbox-fluid": "node ./src/cli/simput-cli.js -c ./types/feelpp-toolbox-fluid/src -o ./static/types -t feelpp-toolbox-fluid",
     "prepublishOnly": "npm run version && npm run bundle"
   },
-  "author": "Kitware",
+  "author": "C. Trophime",
   "dependencies": {
     "material-design-icons-iconfont": "3.0.3",
     "mousetrap": "1.6.2",
