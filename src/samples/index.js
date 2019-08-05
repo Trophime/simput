@@ -3,32 +3,22 @@ import Images from 'simput/src/samples/images';
 // prettier-ignore
 export default [
   {
-    label: 'Oscillator',
-    image: Images.oscillator,
-    description: 'Oscillator source for In-Situ simulation',
-    acknowledgement: 'Example by Kitware Inc.',
-    model: {
-      type: 'oscillator',
-      data: {},
-    },
-  },
-  {
-    label: 'Address book',
-    icon: 'contact_mail',
-    description: 'Address book which generate vcs files',
-    acknowledgement: 'Example by Kitware Inc.',
-    model: {
-      type: 'vcard',
-      data: {},
-    },
-  },
-  {
     label: 'OpenFOAM periodic',
     image: Images.OpenFOAM,
     description: 'Simple OpenFOAM input files case manager',
     acknowledgement: 'Example by OpenFOAM community. (Robert Sawko)',
     model: {
       type: 'openfoam-periodic',
+      data: {},
+    },
+  },
+  {
+    label: 'OpenFOAM tutorials',
+    image: Images.OpenFOAM,
+    description: 'Simple OpenFOAM input files case manager',
+    acknowledgement: 'Example by OpenFOAM community. (Robert Sawko)',
+    model: {
+      type: 'openfoam-tutorials',
       data: {},
     },
   },
@@ -43,10 +33,13 @@ export default [
     },
   },
   {
-    label: 'Vera',
-    icon: 'wb_sunny',
+    label: 'Feelpp Toolbox Fluid',
+    image: Images.Feelpp-Toolbox-Fluid,
+    icon: 'flight',
+    description: 'Feel++ is a poweful, expressive and scalable finite element embedded library in C++.',
+    acknowledgement: 'Feel++ Team.',
     model: {
-      type: 'vera',
+      type: 'feelpp-toolbox-fluid',
       data: {},
     },
   },
@@ -73,14 +66,4 @@ export default [
   //   },
   // },
 
-  {
-    label: 'Feel++-Toolbox fluid',
-    icon: 'flight',
-    description: 'PyFR is an open-source Python based framework for solving advection-diffusion type problems on streaming architectures using the Flux Reconstruction approach of Huynh.',
-    acknowledgement: 'Example by Kitware Inc.',
-    model: {
-      type: 'feelpp_toolbox_fluid_simput',
-      data: {},
-    },
-  },
 ];
