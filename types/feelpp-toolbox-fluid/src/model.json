@@ -35,7 +35,8 @@
     "definitions": {
        "discretization":
         {
-            "parameters": [
+            "label": "Feelpp Toolbox Fluid",
+	    "parameters": [
                 {
                     "id":"dim","type":"string","ui":"enum",
                     "noEmpty": 1,"size"   : 1,"default": ["3D"],
@@ -142,7 +143,11 @@
            "parameters": [
                { "id":"name", "type":"string","size": 1 },
                { "id":"markers", "ui":"list" },
-               { "id":"type", "type":"string", "ui":"enum","noEmpty": 1,"size": 1,
+               { "id":"type",
+		 "type":"string",
+		 "ui":"enum",
+		 "noEmpty": 1,
+		 "size": 1,
                  "default": ["Velocity_Imposed"],
                  "domain"   : {
                      "Velocity Imposed": "Velocity_Imposed",
@@ -162,13 +167,15 @@
        },
        "boundaryconditions_velocityImposed":
        {
-           "parameters": [
+           "label": "Velocity_Imposed",
+	   "parameters": [
                { "id":"expr", "type":"string","size": 1 }
            ]
        },
        "boundaryconditions_inlet":
        {
-           "parameters": [
+           "label": "Inlet",
+	   "parameters": [
                { "id":"profile", "type":"string", "ui":"enum","noEmpty": 1,"size": 1,
                  "default": ["parabolic"],
                  "domain"   : {
@@ -188,7 +195,8 @@
        },
        "boundaryconditions_outlet":
        {
-           "parameters": [
+           "label": "Outlet",
+	   "parameters": [
                { "id":"model", "type":"string", "ui":"enum","noEmpty": 1,"size": 1,
                  "default": ["Free"],
                  "domain"   : {
@@ -200,7 +208,8 @@
        },
        "boundaryconditions_outlet_windkessel":
        {
-           "parameters": [
+           "label": "Outlet windkessel",
+	   "parameters": [
                { "id":"Rd", "type":"double","size": 1 },
                { "id":"Rp", "type":"double","size": 1 },
                { "id":"Cd", "type":"double","size": 1 },
