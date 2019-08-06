@@ -11,12 +11,15 @@ import 'material-design-icons-iconfont/dist/material-design-icons.css';
 // global symbol expose/export
 import 'simput/src/expose';
 
+import vtkURLExtract from 'vtk.js/Sources/Common/Core/URLExtract';
+
 import App from 'simput/src/components/core/App';
 import Store from 'simput/src/stores';
-import { Mutations } from 'simput/src/stores/types';
+import { Actions, Mutations } from 'simput/src/stores/types';
 
 import registerDefaultProperties from 'simput/src/components/properties/registerDefaults';
 import HookManager from 'simput/src/core/HookManager';
+import ReaderFactory from 'simput/src/io/ReaderFactory';
 
 Vue.use(Vuetify);
 
@@ -68,8 +71,33 @@ export function createViewer() {
 
   return {
     processURLArgs() {
-      // Add URL argument handling...
-      // FIXME
+      const { url, type } = vtkURLExtract.extractURLParameters();
+      if (url || type) {
+        // don't flash landing
+        Store.commit(Mutations.SHOW_APP);
+      }
+
+      // try URL first, then load type
+      if (url) {
+        return ReaderFactory.downloadDataset('data.zip', url).then((result) => {
+          const { dataset } = result;
+          if (dataset.type && dataset.data) {
+            Store.commit(Mutations.SET_MODEL, {
+              type: dataset.type,
+              data: dataset.data,
+            });
+            return Store.dispatch(Actions.LOAD_TEMPLATE, dataset.type);
+          }
+          return Promise.reject(new Error('No model found in download'));
+        });
+      } else if (type) {
+        Store.commit(Mutations.SET_MODEL, {
+          type,
+          data: {},
+        });
+        return Store.dispatch(Actions.LOAD_TEMPLATE, type);
+      }
+      return Promise.resolve();
     },
   };
 }
