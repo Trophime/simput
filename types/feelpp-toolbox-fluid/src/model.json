@@ -46,7 +46,7 @@
                 {"id":"directory","type":"string","size":1,"default": [""]},
                 {"id":"gmsh.scale","type":"string","size":1,"default": [""]},
                 {"id":"gmsh.hsize","type":"string","size":1,"default": [""]},
-                {"id":"filename","type":"string","size":1,"default": [""]}
+                {"id":"filename","type":"string","size":1,"default": [""]},
                 {"id":"mesh.filename","type":"string","size":1,"default": [""]}
             ]
 	},
@@ -77,7 +77,7 @@
 		      "fieldsplit":"fieldsplit",
 		      "ilu":"ilu"
 		  }
-		},
+		}
             ]
 	},
        "discretization":
