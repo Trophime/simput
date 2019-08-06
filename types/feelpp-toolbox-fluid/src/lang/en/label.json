@@ -1,14 +1,42 @@
 {
     "views": {
+        "geometry":"Geometry",	
         "discretization":"Discretization",
         "models": "Models",
         "parameters": "Parameters",
         "materials": "Materials",
         "boundaryconditions": "Boundary Conditions",
+	"solver":"Solver",
         "postprocess_exports": "Post-Processing Exports",
         "postprocess_measures": "Post-Processing Measures"
     },
     "attributes": {
+        "geometry":
+        {
+            "parameters": {
+                "directory":"Directory",
+		"gmsh.scale":"gmsh.scale",
+		"gmsh.hsize":"gmsh.hsize",
+		"filename":"Filename (json,...)",
+		"mesh.filename":"Mesh (geo)"
+            }
+        },
+
+        "solver":
+        {
+            "parameters": {
+                "time":"IsTransient",
+		"bdf.order": "bdf.order",
+		"time_step": "Time Step",
+		"tile_final": "Time Final",
+		"pc-type": "Preconditionner",
+		"ksp-monitor": "Monitor solver",
+		"snes-monitor": "Monitor nonlinear solver",
+		"ksp-converged-reason": "ksp-converged-reason",
+		"snes-converged-reason": "snes-converged-reason",
+		"linearsystem-cst-update": "Update linearsystem",
+		"jacobian-linear-update": "Update Jacobian"
+
         "discretization":
         {
             "parameters": {

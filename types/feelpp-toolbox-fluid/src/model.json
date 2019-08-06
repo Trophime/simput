@@ -11,9 +11,9 @@
        "postprocess_exports"
    ],
     "views" : {
-       "geometry": { "attributes": [ "geometry"]},
-       "discretization": { "attributes": [ "discretization"]},
-       "models"     : { "attributes": [ "models"]},
+       "geometry": { "attributes": [ "geometry" ]},
+       "discretization": { "attributes": [ "discretization" ]},
+       "models"     : { "attributes": [ "models" ]},
        "parameters":   { "attributes": [ "parameters" ] },
        "materials":   {
            "attributes": [ "materials", "materials_properties" ], "size": -1,
@@ -43,11 +43,11 @@
         {
 	    "label": "Define Geometry",
 	    "parameters": [
-                {"id":"directory","type":"string","size":1,"default": [""]},
-                {"id":"gmsh.scale","type":"string","size":1,"default": [""]},
-                {"id":"gmsh.hsize","type":"string","size":1,"default": [""]},
-                {"id":"filename","type":"string","size":1,"default": [""]},
-                {"id":"mesh.filename","type":"string","size":1,"default": [""]}
+                {"id":"directory", "type":"string", "size":1},
+                {"id":"gmsh.scale", "type":"string", "size":1, "default": "1"},
+                {"id":"gmsh.hsize", "type":"string", "size":1, "show": "mesh.filename[0]"},
+                {"id":"filename", "type":"string", "size":1},
+                {"id":"mesh.filename", "type":"string", "size":1}
             ]
 	},
        "solver":
@@ -60,17 +60,17 @@
 		  }
 		},
 		{ "id":"time","type": "bool","size": 1,"ui": "checkbox","default": [ true, false ]},
-		{ "id":"bdf.order","type": "string","size": 1, "default": [ "1" ], "show": "time[0]"},	
-		{ "id":"time_step","type": "string","size": 1, "default": [ "1" ], "show": "time[0]"},
-		{ "id":"time_final","type": "string","size": 1, "default": [ "1" ], "show": "time[0]"},
+		{ "id":"bdf.order","type": "string","size": 1, "default": "1", "show": "time[0]"},	
+		{ "id":"time_step","type": "string","size": 1, "default": "1", "show": "time[0]"},
+		{ "id":"time_final","type": "string","size": 1, "default": "1", "show": "time[0]"},
 	
-                { "id":"linearsystem-cst-update","type": "bool","size": 1,"ui": "checkbox","default": [ true, false ]},
-                { "id":"jacobian-linear-update","type": "bool","size": 1,"ui": "checkbox","default": [ true, false ]},
-                { "id":"snes-monitor","type": "bool","size": 1,"ui": "checkbox","default": [ true, false ]},
-                { "id":"snes-converged-reason","type": "bool","size": 1,"ui": "checkbox","default": [ true, false ]},
-                { "id":"ksp-monitor","type": "bool","size": 1,"ui": "checkbox","default": [ true, false ]},
-                { "id":"ksp-converged-reason","type": "bool","size": 1,"ui": "checkbox","default": [ true, false ]},
-                { "id":"pc-type","type": "string","size": 1,"ui": "enum","default": [ "gasm" ],
+                { "id":"linearsystem-cst-update", "type": "bool", "size": 1,"ui": "checkbox","default": [ true, false ]},
+                { "id":"jacobian-linear-update", "type": "bool", "size": 1,"ui": "checkbox","default": [ true, false ]},
+                { "id":"snes-monitor", "type": "bool", "size": 1,"ui": "checkbox","default": [ true, false ]},
+                { "id":"snes-converged-reason", "type": "bool", "size": 1,"ui": "checkbox","default": [ true, false ]},
+                { "id":"ksp-monitor", "type": "bool", "size": 1,"ui": "checkbox","default": [ true, false ]},
+                { "id":"ksp-converged-reason", "type": "bool", "size": 1,"ui": "checkbox","default": [ true, false ]},
+                { "id":"pc-type", "type": "string", "size": 1, "ui": "enum","default": [ "gasm" ],
 		  "domain": {
 		      "gasm":"gasm",
 		      "lu":"lu",
