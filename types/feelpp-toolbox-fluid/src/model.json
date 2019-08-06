@@ -223,7 +223,16 @@
            ]
        },
 
-        "postprocess_measures":
+       "volumicforces":
+       {
+           "label": "Volumic forces",
+           "parameters": [
+               { "id":"marker", "type":"string","size": 1 },
+               { "id":"expr", "ui":"list" }
+	   ]
+       },
+
+       "postprocess_measures":
        {
            "parameters": [
                { "id":"name", "type":"string","size": 1 },
@@ -231,12 +240,57 @@
                  "default": ["Statistics"],
                  "domain"   : {
                      "Statistics": "Statistics",
-                     "Norm": "Norm"
+                     "Norm": "Norm",
+		     "Points": "Points",
+		     "Forces": "Foce",
+		     "FlowRate": "FlowRate",
+		     "Pressure": "Pressure",
+		     "VelocityDivergence": "VelocityDivergence" 
+                 }
+               },
+	       ["Measures_Points", "Measures_Forces", "Measures_FlowRate"]
+           ],
+	   "children": {
+	       "Measures_Points": "postprocess_measures.type[0] === \"Points\"",
+	       "Measures_Forces": "postprocess_measures.type[0] === \"Forces\"",
+	       "Measures_FlowRate": "postprocess_measures.type[0] === \"FlowRate\""
+	   }
+       },
+       "Measures_Points":
+	{
+	   "parameters": [
+	       { "id":"tag", "type":"string","size": 1 },
+	       { "id":"coord", "type":"string","size": 3, "default": ["x", "y", "z"] },
+	       { "id":"fields", "type":"string","ui":"enum","noEmpty": 1,"size": 1,
+                 "default": ["Velocity"],
+                 "domain"   : {
+                     "Pressure": "pressure",
+		     "Velocity": "velocity" 
                  }
                }
-           ]
+	   ]
        },
-
+       "Measures_Forces":
+       {
+	   "parameters": [
+	       { "id":"markers", "ui":"list" }
+	   ]
+       },
+       "Measures_FlowRate":
+       {
+	   "parameters": [
+	       { "id":"tag", "type":"string","size": 1 },
+	       { "id":"marker", "type":"string","size": 1 },
+	       { "id":"direction", "type":"string","ui":"enum","noEmpty": 1,"size": 1,
+                 "default": ["Exterior"],
+                 "domain"   : {
+                     "Interior": "interior_normal",
+		     "Exterior": "exterior_normal" 
+                 }
+               }
+	   ]
+       },
+	
        "postprocess_exports":
        {
            "parameters": [
@@ -245,13 +299,18 @@
                  "domain"   : {
                      "Velocity": "Velocity",
                      "Pressure": "Pressure",
-                     "Pressure2": "Pressure2",
-                     "Pressure3": "Pressure3",
-                     "Pressure4": "Pressure4",
-                     "Pressure5": "Pressure5"
+		     "Displacement": "displacement",
+		     "vorticity": "vorticity",
+		     "stress": "stress",
+		     "normal-stress": "normal-stress",
+		     "wall-shear-stress": "wall-shear-stress",
+		     "density": "density",
+		     "viscosity": "viscosity",
+		     "pid": "pid",
+		     "alemesh": "alemesh"
                  }
-               },
-               { "id":"type2","type": "bool","size": 2,"ui": "checkbox","default": [ true, false ], "componentLabels": [ "hj   ","lklk"] }
+               }
+               // { "id":"type2", "type":"bool", "size": 2, "ui": "checkbox", "default": [ true, false ], "componentLabels": [ "hj   ","lklk"] }
 
            ]
        }
