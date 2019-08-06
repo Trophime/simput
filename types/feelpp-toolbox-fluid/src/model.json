@@ -1,14 +1,17 @@
 {
     "order": [
+       "geometry",	
        "discretization",
        "models",
        "parameters",
        "materials",
        "boundaryconditions",
+       "solver",
        "postprocess_measures",
        "postprocess_exports"
    ],
     "views" : {
+       "geometry": { "attributes": [ "geometry"]},
        "discretization": { "attributes": [ "discretization"]},
        "models"     : { "attributes": [ "models"]},
        "parameters":   { "attributes": [ "parameters" ] },
@@ -22,6 +25,9 @@
            "hooks": [ { "type": "copyParameterToViewName", "attribute": "boundaryconditions.name" } ],
            "readOnly": true
        },
+	"solver": {
+           "attributes": [ "solver" ]
+       },	
        "postprocess_exports":
        {
            "attributes": [ "postprocess_exports" ]
@@ -33,9 +39,50 @@
        }
    },
     "definitions": {
+       "geometry":
+        {
+	    "label": "Define Geometry",
+	    "parameters": [
+                {"id":"directory","type":"string","size":1,"default": [""]},
+                {"id":"gmsh.scale","type":"string","size":1,"default": [""]},
+                {"id":"gmsh.hsize","type":"string","size":1,"default": [""]},
+                {"id":"filename","type":"string","size":1,"default": [""]}
+                {"id":"mesh.filename","type":"string","size":1,"default": [""]}
+            ]
+	},
+       "solver":
+        {
+	    "label": "Define Solver",
+	    "parameters": [
+                { "id":"name","type": "string","size": 1,"ui": "enum", "default": ["Newton"],
+		  "domain": {
+		      "Newton":"Newton"
+		  }
+		},
+		{ "id":"time","type": "bool","size": 1,"ui": "checkbox","default": [ true, false ]},
+		{ "id":"bdf.order","type": "string","size": 1, "default": [ "1" ], "show": "time[0]"},	
+		{ "id":"time_step","type": "string","size": 1, "default": [ "1" ], "show": "time[0]"},
+		{ "id":"time_final","type": "string","size": 1, "default": [ "1" ], "show": "time[0]"},
+	
+                { "id":"linearsystem-cst-update","type": "bool","size": 1,"ui": "checkbox","default": [ true, false ]},
+                { "id":"jacobian-linear-update","type": "bool","size": 1,"ui": "checkbox","default": [ true, false ]},
+                { "id":"snes-monitor","type": "bool","size": 1,"ui": "checkbox","default": [ true, false ]},
+                { "id":"snes-converged-reason","type": "bool","size": 1,"ui": "checkbox","default": [ true, false ]},
+                { "id":"ksp-monitor","type": "bool","size": 1,"ui": "checkbox","default": [ true, false ]},
+                { "id":"ksp-converged-reason","type": "bool","size": 1,"ui": "checkbox","default": [ true, false ]},
+                { "id":"pc-type","type": "string","size": 1,"ui": "enum","default": [ "gasm" ],
+		  "domain": {
+		      "gasm":"gasm",
+		      "lu":"lu",
+		      "fieldsplit":"fieldsplit",
+		      "ilu":"ilu"
+		  }
+		},
+            ]
+	},
        "discretization":
         {
-            "label": "Feelpp Toolbox Fluid",
+            "label": "Feelpp Toolbox Fluid Discretization",
 	    "parameters": [
                 {
                     "id":"dim","type":"string","ui":"enum",
@@ -57,7 +104,8 @@
         },
 
        "models": {
-         "parameters": [
+           "label": "Feelpp Toolbox Fluid Model",
+	   "parameters": [
             {
                 "id"     : "name",
                 "type"   : "string",
@@ -73,7 +121,8 @@
          ]
       },
       "parameters": {
-         "parameters": [
+          "label": "Define parameters",
+	  "parameters": [
              {
                "id"     : "parameters.map",
                "ui"     : "map"
@@ -81,7 +130,8 @@
          ]
       },
       "materials": {
-         "parameters": [
+         "label": "Assign Materials",
+	 "parameters": [
              { "id":"name", "type":"string","size": 1 },
              { "id":"markers", "ui":"list" }
          ]
@@ -140,7 +190,8 @@
 
        "boundaryconditions":
        {
-           "parameters": [
+           "label": "Assign Boundary Conditions",
+	   "parameters": [
                { "id":"name", "type":"string","size": 1 },
                { "id":"markers", "ui":"list" },
                { "id":"type",
