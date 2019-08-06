@@ -310,7 +310,6 @@
 		     "alemesh": "alemesh"
                  }
                }
-               // { "id":"type2", "type":"bool", "size": 2, "ui": "checkbox", "default": [ true, false ], "componentLabels": [ "hj   ","lklk"] }
 
            ]
        }
