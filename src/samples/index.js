@@ -35,7 +35,6 @@ export default [
   {
     label: 'Feelpp Toolbox Fluid',
     image: Images.FeelppToolboxFluid,
-    icon: 'flight',
     description: 'Feel++ is a poweful, expressive and scalable finite element embedded library in C++.',
     acknowledgement: 'Feel++ Team.',
     model: {
