@@ -43,6 +43,16 @@ export default [
     },
   },
   {
+    label: 'Oscillator',
+    image: Images.oscillator,
+    description: 'Oscillator source for In-Situ simulation',
+    acknowledgement: 'Example by Kitware Inc.',
+    model: {
+      type: 'oscillator',
+      data: {},
+    },
+  },
+  {
     label: 'Create your own model type',
     icon: 'note_add',
     description: 'Click here to learn how to create your own type.',

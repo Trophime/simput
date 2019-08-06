@@ -32,6 +32,7 @@ module.exports = function(dataModel) {
         jsonSectionModels.equations = dataModel.data.models[0].models.name.value[0];
     else
         jsonSectionModels.equations = "Navier-Stokes";
+    console.log('jsonSectionModels:', jsonSectionModels);
 
     var jsonSectionParameters = {};
     if ( dataModel.data.parameters ) {
@@ -42,7 +43,8 @@ module.exports = function(dataModel) {
             }
         }
     }
-
+    console.log('jsonSectionParameters:', jsonSectionParameters);
+    
     var jsonSectionMaterials = {};
     if ( dataModel.data.materials ) {
         for (let i = 0; i < dataModel.data.materials.length; i++) {
@@ -69,6 +71,7 @@ module.exports = function(dataModel) {
             jsonSectionMaterials[matName] = jsonCurrentMaterial;        
         }
     }
+    console.log('jsonSectionMaterials:', jsonSectionMaterials);
 
     var jsonSectionBoundaryConditions = {};
     if ( dataModel.data.boundaryconditions ) {
@@ -117,6 +120,7 @@ module.exports = function(dataModel) {
             }
         }
     }
+    console.log('jsonBoundaryConditions:', jsonSectionBoundaryConditions);
 
     var jsonSectionPostProcess = {};
 
@@ -126,10 +130,11 @@ module.exports = function(dataModel) {
                              Materials:jsonSectionMaterials,
                              BoundaryConditions:jsonSectionBoundaryConditions,
                              PostProcess:jsonSectionPostProcess
-                           } 
-    //console.log('sectionParameters:', sectionParameters);
-
-    //console.log('jsonAllSections:', jsonAllSections);
+                           } ;
+    
+    console.log('jsonAllSections:', jsonAllSections);
+    console.log('output cfg:', template({ models: { name:jsonSectionModels.equations } }) );
+    console.log('output json:', JSON.stringify(jsonAllSections, null, 2) );
 
     
     return {
