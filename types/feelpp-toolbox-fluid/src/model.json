@@ -258,6 +258,7 @@
        },
        "Measures_Points":
 	{
+	   "label": "Measures_Points",
 	   "parameters": [
 	       { "id":"tag", "type":"string","size": 1 },
 	       { "id":"coord", "type":"string","size": 3, "default": ["x", "y", "z"] },
@@ -272,12 +273,14 @@
        },
        "Measures_Forces":
        {
+	   "label": "Measures_Forces",
 	   "parameters": [
 	       { "id":"markers", "ui":"list" }
 	   ]
        },
        "Measures_FlowRate":
        {
+	   "label": "Measures_FlowRate",
 	   "parameters": [
 	       { "id":"tag", "type":"string","size": 1 },
 	       { "id":"marker", "type":"string","size": 1 },
