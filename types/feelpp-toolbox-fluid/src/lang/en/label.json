@@ -36,7 +36,9 @@
 		"snes-converged-reason": "snes-converged-reason",
 		"linearsystem-cst-update": "Update linearsystem",
 		"jacobian-linear-update": "Update Jacobian"
-
+	    }
+	},
+	
         "discretization":
         {
             "parameters": {
