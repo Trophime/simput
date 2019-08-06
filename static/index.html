@@ -30,16 +30,16 @@
       const simputInstance = Simput.createViewer(container);
 
       // Register various template
-      // Simput.registerType('demo', ['./types/demo.js']);
+      Simput.registerType('demo', ['./types/demo.js']);
       Simput.registerType('pyfr', ['./types/pyfr.js']);
-      // Simput.registerType('vcard', ['./types/vcard.js']);
+      Simput.registerType('vcard', ['./types/vcard.js']);
       Simput.registerType('openfoam-periodic', ['./types/openfoam-periodic.js']);
       Simput.registerType('openfoam-tutorials', ['./types/openfoam-tutorials.js']);
       Simput.registerType('openfoam-windtunnel', ['./types/openfoam-windtunnel.js']);
-      // Simput.registerType('nwchem', ['./types/nwchem.js']);
+      Simput.registerType('nwchem', ['./types/nwchem.js']);
 
-      // Simput.registerType('oscillator', ['./types/oscillator.js']);
-      // Simput.registerType('vera', ['./types/vera.js']);
+      Simput.registerType('oscillator', ['./types/oscillator.js']);
+       Simput.registerType('vera', ['./types/vera.js']);
 
       // Test / debug --- only for dev
       Simput.registerType('addressbook', ['./types/addressbook.js']);
