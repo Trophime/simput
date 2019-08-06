@@ -45,9 +45,9 @@
 	    "parameters": [
                 {"id":"directory", "type":"string", "size":1},
                 {"id":"gmsh.scale", "type":"string", "size":1, "default": "1"},
-                {"id":"gmsh.hsize", "type":"string", "size":1, "show": "mesh.filename[0]"},
+                {"id":"gmsh.hsize", "type":"string", "size":1, "show": "geofilename[0]"},
                 {"id":"filename", "type":"string", "size":1},
-                {"id":"mesh.filename", "type":"string", "size":1}
+                {"id":"geofilename", "type":"string", "size":1}
             ]
 	},
        "solver":
