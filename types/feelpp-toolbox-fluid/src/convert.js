@@ -20,6 +20,34 @@ function initJsonSection( section, subsection, jsonInOut )
         jsonInOut[section][subsection] = {};
 }
 
+function displayField(item, fieldName)
+{
+    const value = attributes.models[fieldName].value;
+    if (value.length === 1) {
+	model_attr[fieldName] = value[0];
+    } else {
+	model_attr[fieldName] = value;
+    }
+}
+
+function displayAttributes(item)
+{
+    console.log('displayAttributes:')
+    console.log(item)
+    // const model_att = {};
+    Object.keys(item).forEach((fieldName) => {
+	const value = item[fieldName].value;
+	console.log('fieldName:', fieldName);
+	console.log('value:', value);
+	// if (value.length === 1) {
+	//     model_attr[fieldName] = value[0];
+	// } else {
+	//     model_attr[fieldName] = value;
+	// }
+    });
+    // console.log(model_attr);
+}
+
 module.exports = function(dataModel) {
 
     //const output = {};
@@ -27,27 +55,28 @@ module.exports = function(dataModel) {
 
     console.log('dataModel:');
     console.log(dataModel);
-    console.log('dataModel.data:')
+    console.log('dataModel.data:');
     console.log(dataModel.data);
 
     //var mjson = { models: { name:dataModel.data.models[0].models.name.value[0] } };
-
+    if ( dataModel.data.discretization )
+    {
+	console.log('dataModel.data.discretization:');
+	console.log(dataModel.data.discretization);
+	console.log('dataModel.data.discretization attributes');
+	dataModel.data.models.forEach(displayAttributes);	
+    }
+    if ( dataModel.data.models )
+    {
+	console.log('dataModel.data.models:')
+	console.log(dataModel.data.discretization);
+	console.log('dataModel.data.models attributes');
+	dataModel.data.models.forEach(displayAttributes);	
+    }
+    
     var jsonSectionModels = {};
     if ( dataModel.data.models )
     {
-	console.log('dataModel.data.models atrributes:')
-	dataModel.data.models.forEach((attributes) => {
-	    const model_att = {};
-	    Object.keys(attributes.models).forEach((fieldName) => {
-		const value = attributes.models[fieldName].value;
-		if (value.length === 1) {
-		    model_attr[fieldName] = value[0];
-		} else {
-		    model_attr[fieldName] = value;
-		}
-	    });
-	    console.log(model_attr);
-	});	
         jsonSectionModels.equations = dataModel.data.models[0].models.name.value[0];
     }
     else
