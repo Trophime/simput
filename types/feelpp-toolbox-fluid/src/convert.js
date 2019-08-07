@@ -39,6 +39,49 @@ module.exports = function(dataModel) {
     else
 	jsonSectionModels.equations = dataModel.data.models[0].models.name.value[0];
 
+    /* Define Main cfg params */
+    var jsonSectionMain = {};
+    if ( isEmpty(dataModel.data.geometry) )
+        jsonSectionMain.directory = "";
+    else
+    {
+	jsonSectionMain.directory = dataModel.data.geometry[0].geometry.directory.value[0];
+	jsonSectionMain.model = dataModel.data.geometry[0].geometry.filename.value[0];
+	jsonSectionMain.geo = dataModel.data.geometry[0].geometry.geofilename.value[0];
+	jsonSectionMain.hsize = dataModel.data.geometry[0].geometry.gmsh.hsize.value[0];
+	jsonSectionMain.scale = dataModel.data.geometry[0].geometry.gmsh.scale.value[0];
+    }
+    
+    if ( isEmpty(dataModel.data.discretization) )
+        jsonSectionMain.dim = "3";
+    else
+    {
+	jsonSectionMain.dim = dataModel.data.discretization[0].discretization.dim.value[0];
+	jsonSectionMain.discretization = dataModel.data.discretization[0].discretization.discretization.value[0];
+    }
+    
+    if ( isEmpty(dataModel.data.solver) )
+        jsonSectionMain.solver = "Newton";
+    else
+    {
+	jsonSectionMain.solver = dataModel.data.solver[0].solver.type.value[0];
+	jsonSectionMain.precond = dataModel.data.solver[0].solver.pc-type.value[0];
+	jsonSectionMain.time = dataModel.data.solver[0].solver.time.value[0];
+	if ( jsonSectionMain.time )
+	{
+	    jsonSectionMain.bdforder = dataModel.data.solver[0].solver.bdf.order.value[0];
+	    jsonSectionMain.time_step = dataModel.data.solver[0].solver.time_step.value[0];
+	    jsonSectionMain.time_final = dataModel.data.solver[0].solver.time_final.value[0];
+	}
+	else
+	{
+	    jsonSectionMain.bdforder = 0;
+	    jsonSectionMain.time_step = 0;
+	    jsonSectionMain.time_final = 0;
+	}
+    }
+    
+    /* Define Json Model */
     var jsonSectionParameters = {};
     if ( dataModel.data.parameters ) {
         for (let i = 0; i < dataModel.data.parameters.length; i++) {
@@ -135,7 +178,10 @@ module.exports = function(dataModel) {
                            } ;
     
     console.log('=== output cfg ===')
-    console.log(template({ models: { name:jsonSectionModels.equations } }) );
+    console.log(template({ models: { name:jsonSectionModels.equations },
+			   geometry: {directory:jsonSectionMain.directory, model:jsonSectionMain.model, mesh:jsonSectionMain.geo, hsize:jsonSectionMain.hsize},
+			   discretization:{ dim:jsonSectionMain.dim, discretization:jsonSectionMain.discretization },
+			   solver: {type:jsonSectionMain.solver, pctype:jsonSectionMain.precon, bdforder:jsonSectionMain.bdforder, timestep:jsonSectionMain.time_step, timefinal:	jsonSectionMain.time_final} }) );
     console.log('=== output json ===')
     console.log(JSON.stringify(jsonAllSections, null, 2) );
 

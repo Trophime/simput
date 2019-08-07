@@ -17,8 +17,8 @@
                 "directory":"Directory",
 		"gmsh.scale":"gmsh.scale",
 		"gmsh.hsize":"gmsh.hsize",
-		"filename":"Filename (json,...)",
-		"geofilename":"Mesh (geo)"
+		"filename":"Filename (json Model file)",
+		"geofilename":"Mesh (json-h5/geo/msh/med/...)"
             }
         },
 

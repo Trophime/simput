@@ -44,11 +44,11 @@
 	    "label": "Define Geometry",
 	    "parameters": [
                 {"id":"directory", "type":"string", "size":1},
-                {"id":"gmsh.scale", "type":"string", "size":1, "default": "1"},
-                {"id":"gmsh.hsize", "type":"string", "size":1, "show": "geofilename[0]"},
                 {"id":"filename", "type":"string", "size":1},
-                {"id":"geofilename", "type":"string", "size":1}
-            ]
+                {"id":"geofilename", "type":"string", "size":1},
+                {"id":"gmsh.scale", "type":"string", "size":1, "default": "1"},
+                {"id":"gmsh.hsize", "type":"string", "size":1, "show": "geofilename[0]"}
+           ]
 	},
 	"solver":
         {
@@ -59,17 +59,6 @@
 		      "Newton":"Newton"
 		  }
 		},
-		{ "id":"time","type": "bool","size": 1,"ui": "checkbox","default": [ true, false ]},
-		{ "id":"bdf.order","type": "string","size": 1, "default": "1", "show": "time[0]"},	
-		{ "id":"time_step","type": "string","size": 1, "default": "1", "show": "time[0]"},
-		{ "id":"time_final","type": "string","size": 1, "default": "1", "show": "time[0]"},
-		
-                { "id":"linearsystem-cst-update", "type": "bool", "size": 1,"ui": "checkbox","default": [ true, false ]},
-                { "id":"jacobian-linear-update", "type": "bool", "size": 1,"ui": "checkbox","default": [ true, false ]},
-                { "id":"snes-monitor", "type": "bool", "size": 1,"ui": "checkbox","default": [ true, false ]},
-                { "id":"snes-converged-reason", "type": "bool", "size": 1,"ui": "checkbox","default": [ true, false ]},
-                { "id":"ksp-monitor", "type": "bool", "size": 1,"ui": "checkbox","default": [ true, false ]},
-                { "id":"ksp-converged-reason", "type": "bool", "size": 1,"ui": "checkbox","default": [ true, false ]},
                 { "id":"pc-type", "type": "string", "size": 1, "ui": "enum","default": [ "gasm" ],
 		  "domain": {
 		      "gasm":"gasm",
@@ -77,7 +66,21 @@
 		      "fieldsplit":"fieldsplit",
 		      "ilu":"ilu"
 		  }
-		}
+		},
+		
+                { "id":"ksp-monitor", "type": "bool", "size": 1,"ui": "checkbox","default": [ true, false ]},
+                { "id":"ksp-converged-reason", "type": "bool", "size": 1,"ui": "checkbox","default": [ true, false ]},
+
+                { "id":"snes-monitor", "type": "bool", "size": 1,"ui": "checkbox","default": [ true, false ]},
+                { "id":"snes-converged-reason", "type": "bool", "size": 1,"ui": "checkbox","default": [ true, false ]},
+
+                { "id":"linearsystem-cst-update", "type": "bool", "size": 1,"ui": "checkbox","default": [ true, false ]},
+                { "id":"jacobian-linear-update", "type": "bool", "size": 1,"ui": "checkbox","default": [ true, false ]},
+		
+		{ "id":"time","type": "bool","size": 1,"ui": "checkbox","default": [ true, false ]},
+		{ "id":"bdf.order","type": "string","size": 1, "default": "1", "show": "time[0]"},	
+		{ "id":"time_step","type": "string","size": 1, "default": "1", "show": "time[0]"},
+		{ "id":"time_final","type": "string","size": 1, "default": "1", "show": "time[0]"}
             ]
 	},
 	"discretization":

@@ -1,6 +1,27 @@
+{{#if geometry.directory}}
+directory={{{geometry.directory}}} 
+{{/if}}
 
-[fluid]
+case.dimension={{{discretization.dim }}}
+case.discretization={{{discretization.discretization}}} 
 
-{{#if models.name}}
-toto={{{ models.name }}}
+[fluid] 
+filename=$cfgdir/{{{geometry.model}}}
+mesh.filename=$cfgdir/{{{geometry.mesh}}} 
+{{#if geometry.hsize}}
+gmsh.hsize={{{geometry.hsize}}} 
+{{/if}}
+
+solver={{{solver.type}}} 
+
+{{#if solver.pctype}}
+pc-type={{{solver.pctype}}}
+{{/if}}
+
+{{#if solver.time}}
+bdf.order={{{solver.bdforder}}} 
+
+[ts]
+time-step=solver.timestep}}} 
+time-final=solver.timefinal}}}
 {{/if}}
