@@ -32,6 +32,7 @@ module.exports = function(dataModel) {
 
     var jsonSectionModels = {};
     if ( dataModel.data.models )
+    {
 	dataModel.data.models.forEach((attributes) => {
 	    const model_att = {};
 	    Object.keys(attributes.models).forEach((fieldName) => {
@@ -45,6 +46,7 @@ module.exports = function(dataModel) {
 	    console.log(model_attr);
 	});	
         jsonSectionModels.equations = dataModel.data.models[0].models.name.value[0];
+    }
     else
         jsonSectionModels.equations = "Navier-Stokes";
     console.log('jsonSectionModels:', jsonSectionModels);
