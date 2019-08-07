@@ -1,45 +1,45 @@
 {
     "order": [
-       "geometry",	
-       "discretization",
-       "models",
-       "parameters",
-       "materials",
-       "boundaryconditions",
-       "solver",
-       "postprocess_measures",
-       "postprocess_exports"
-   ],
+	"geometry",	
+	"discretization",
+	"models",
+	"parameters",
+	"materials",
+	"boundaryconditions",
+	"solver",
+	"postprocess_measures",
+	"postprocess_exports"
+    ],
     "views" : {
-       "geometry": { "attributes": [ "geometry" ]},
-       "discretization": { "attributes": [ "discretization" ]},
-       "models"     : { "attributes": [ "models" ]},
-       "parameters":   { "attributes": [ "parameters" ] },
-       "materials":   {
-           "attributes": [ "materials", "materials_properties" ], "size": -1,
-           "hooks": [ { "type": "copyParameterToViewName", "attribute": "materials.name" } ],
-           "readOnly": true
-       },
-       "boundaryconditions": {
-           "attributes": [ "boundaryconditions" ], "size": -1,
-           "hooks": [ { "type": "copyParameterToViewName", "attribute": "boundaryconditions.name" } ],
-           "readOnly": true
-       },
+	"geometry": { "attributes": [ "geometry" ]},
+	"discretization": { "attributes": [ "discretization" ]},
+	"models"     : { "attributes": [ "models" ]},
+	"parameters":   { "attributes": [ "parameters" ] },
+	"materials":   {
+            "attributes": [ "materials", "materials_properties" ], "size": -1,
+            "hooks": [ { "type": "copyParameterToViewName", "attribute": "materials.name" } ],
+            "readOnly": true
+	},
+	"boundaryconditions": {
+            "attributes": [ "boundaryconditions" ], "size": -1,
+            "hooks": [ { "type": "copyParameterToViewName", "attribute": "boundaryconditions.name" } ],
+            "readOnly": true
+	},
 	"solver": {
-           "attributes": [ "solver" ]
-       },	
-       "postprocess_exports":
-       {
-           "attributes": [ "postprocess_exports" ]
-       },
-       "postprocess_measures": {
-           "attributes": [ "postprocess_measures" ], "size": -1,
-           "hooks": [ { "type": "copyParameterToViewName", "attribute": "postprocess_measures.name" } ],
-           "readOnly": true
-       }
-   },
+            "attributes": [ "solver" ]
+	},	
+	"postprocess_exports":
+	{
+            "attributes": [ "postprocess_exports" ]
+	},
+	"postprocess_measures": {
+            "attributes": [ "postprocess_measures" ], "size": -1,
+            "hooks": [ { "type": "copyParameterToViewName", "attribute": "postprocess_measures.name" } ],
+            "readOnly": true
+	}
+    },
     "definitions": {
-       "geometry":
+	"geometry":
         {
 	    "label": "Define Geometry",
 	    "parameters": [
@@ -50,7 +50,7 @@
                 {"id":"geofilename", "type":"string", "size":1}
             ]
 	},
-       "solver":
+	"solver":
         {
 	    "label": "Define Solver",
 	    "parameters": [
@@ -63,7 +63,7 @@
 		{ "id":"bdf.order","type": "string","size": 1, "default": "1", "show": "time[0]"},	
 		{ "id":"time_step","type": "string","size": 1, "default": "1", "show": "time[0]"},
 		{ "id":"time_final","type": "string","size": 1, "default": "1", "show": "time[0]"},
-	
+		
                 { "id":"linearsystem-cst-update", "type": "bool", "size": 1,"ui": "checkbox","default": [ true, false ]},
                 { "id":"jacobian-linear-update", "type": "bool", "size": 1,"ui": "checkbox","default": [ true, false ]},
                 { "id":"snes-monitor", "type": "bool", "size": 1,"ui": "checkbox","default": [ true, false ]},
@@ -80,7 +80,7 @@
 		}
             ]
 	},
-       "discretization":
+	"discretization":
         {
             "label": "Feelpp Toolbox Fluid Discretization",
 	    "parameters": [
@@ -103,271 +103,271 @@
             ]
         },
 
-       "models": {
-           "label": "Feelpp Toolbox Fluid Model",
-	   "parameters": [
-            {
-                "id"     : "name",
-                "type"   : "string",
-                "ui"     : "enum",
-                "noEmpty": 1,
-                "size"   : 1,
-                "default": ["Navier-Stokes"],
-                "domain"   : {
-                    "Navier-Stokes": "Navier-Stokes",
-                    "Stokes": "Stokes"
-                }
+	"models": {
+            "label": "Feelpp Toolbox Fluid Model",
+	    "parameters": [
+		{
+                    "id"     : "name",
+                    "type"   : "string",
+                    "ui"     : "enum",
+                    "noEmpty": 1,
+                    "size"   : 1,
+                    "default": ["Navier-Stokes"],
+                    "domain"   : {
+			"Navier-Stokes": "Navier-Stokes",
+			"Stokes": "Stokes"
+                    }
+		}
+            ]
+	},
+	"parameters": {
+            "label": "Define parameters",
+	    "parameters": [
+		{
+		    "id"     : "parameters.map",
+		    "ui"     : "map"
+		}
+            ]
+	},
+	"materials": {
+            "label": "Assign Materials",
+	    "parameters": [
+		{ "id":"name", "type":"string","size": 1 },
+		{ "id":"markers", "ui":"list" }
+            ]
+	},
+	"materials_properties": {
+            "parameters": [
+		{ "id":"density", "type":"string", "size": 1 },
+		{ "id":"viscosity_law", "type":"string","size": 1,
+                  "ui": "enum", "default": ["newtonian"], "noEmpty":1,
+                  "domain": {
+                      "newtonian": "newtonian",
+                      "power-law": "power-law",
+                      "carreau": "carreau",
+                      "carreau-yasuda": "carreau-yasuda"
+                  } },
+		["materials_viscosity_newtonian", "materials_viscosity_power-law", "materials_viscosity_carreau", "materials_viscosity_carreau-yasuda" ]
+            ],
+            "children": {
+		"materials_viscosity_newtonian": "materials_properties.viscosity_law[0] === \"newtonian\"",
+		"materials_viscosity_power-law": "materials_properties.viscosity_law[0] === \"power-law\"",
+		"materials_viscosity_carreau": "materials_properties.viscosity_law[0] === \"carreau\"",
+		"materials_viscosity_carreau-yasuda": "materials_properties.viscosity_law[0] === \"carreau-yasuda\""
             }
-         ]
-      },
-      "parameters": {
-          "label": "Define parameters",
-	  "parameters": [
-             {
-               "id"     : "parameters.map",
-               "ui"     : "map"
-            }
-         ]
-      },
-      "materials": {
-         "label": "Assign Materials",
-	 "parameters": [
-             { "id":"name", "type":"string","size": 1 },
-             { "id":"markers", "ui":"list" }
-         ]
-      },
-       "materials_properties": {
-           "parameters": [
-               { "id":"density", "type":"string", "size": 1 },
-               { "id":"viscosity_law", "type":"string","size": 1,
-                 "ui": "enum", "default": ["newtonian"], "noEmpty":1,
-                 "domain": {
-                     "newtonian": "newtonian",
-                     "power-law": "power-law",
-                     "carreau": "carreau",
-                     "carreau-yasuda": "carreau-yasuda"
-                 } },
-               ["materials_viscosity_newtonian", "materials_viscosity_power-law", "materials_viscosity_carreau", "materials_viscosity_carreau-yasuda" ]
-           ],
-           "children": {
-               "materials_viscosity_newtonian": "materials_properties.viscosity_law[0] === \"newtonian\"",
-               "materials_viscosity_power-law": "materials_properties.viscosity_law[0] === \"power-law\"",
-               "materials_viscosity_carreau": "materials_properties.viscosity_law[0] === \"carreau\"",
-               "materials_viscosity_carreau-yasuda": "materials_properties.viscosity_law[0] === \"carreau-yasuda\""
-           }
 
-       },
-       "materials_viscosity_newtonian": {
-           "parameters": [
-               { "id":"mu", "type":"string","size": 1 }
-           ]
-       },
-       "materials_viscosity_power-law": {
-           "parameters": [
-               { "id":"k", "type":"double","size": 1 },
-               { "id":"n", "type":"double","size": 1 },
-               { "id":"muMin", "type":"double","size": 1 },
-               { "id":"muMax", "type":"double","size": 1 }
-           ]
-       },
-       "materials_viscosity_carreau": {
-           "parameters": [
-               { "id":"lambda", "type":"string","size": 1 },
-               { "id":"n", "type":"string","size": 1 },
-               { "id":"mu0", "type":"string","size": 1 },
-               { "id":"muInf", "type":"string","size": 1 }
-           ]
-       },
-       "materials_viscosity_carreau-yasuda": {
-           "parameters": [
-               { "id":"lambda", "type":"string","size": 1 },
-               { "id":"n", "type":"string","size": 1 },
-               { "id":"a", "type":"string","size": 1 },
-               { "id":"mu0", "type":"string","size": 1 },
-               { "id":"muInf", "type":"string","size": 1 }
-           ]
-       },
+	},
+	"materials_viscosity_newtonian": {
+            "parameters": [
+		{ "id":"mu", "type":"string","size": 1 }
+            ]
+	},
+	"materials_viscosity_power-law": {
+            "parameters": [
+		{ "id":"k", "type":"double","size": 1 },
+		{ "id":"n", "type":"double","size": 1 },
+		{ "id":"muMin", "type":"double","size": 1 },
+		{ "id":"muMax", "type":"double","size": 1 }
+            ]
+	},
+	"materials_viscosity_carreau": {
+            "parameters": [
+		{ "id":"lambda", "type":"string","size": 1 },
+		{ "id":"n", "type":"string","size": 1 },
+		{ "id":"mu0", "type":"string","size": 1 },
+		{ "id":"muInf", "type":"string","size": 1 }
+            ]
+	},
+	"materials_viscosity_carreau-yasuda": {
+            "parameters": [
+		{ "id":"lambda", "type":"string","size": 1 },
+		{ "id":"n", "type":"string","size": 1 },
+		{ "id":"a", "type":"string","size": 1 },
+		{ "id":"mu0", "type":"string","size": 1 },
+		{ "id":"muInf", "type":"string","size": 1 }
+            ]
+	},
 
-       "boundaryconditions":
-       {
-           "label": "Assign Boundary Conditions",
-	   "parameters": [
-               { "id":"name", "type":"string","size": 1 },
-               { "id":"markers", "ui":"list" },
-               { "id":"type",
-		 "type":"string",
-		 "ui":"enum",
-		 "noEmpty": 1,
-		 "size": 1,
-                 "default": ["Velocity_Imposed"],
-                 "domain"   : {
-                     "Velocity Imposed": "Velocity_Imposed",
-                     "Neumann": "Neumann",
-                     "Inlet": "Inlet",
-                     "Outlet": "Outlet"
-                 }
-               },
-               ["boundaryconditions_velocityImposed","boundaryconditions_inlet","boundaryconditions_outlet","boundaryconditions_outlet_windkessel"]
-           ],
-           "children": {
-               "boundaryconditions_velocityImposed": "boundaryconditions.type[0] === \"Velocity_Imposed\"",
-               "boundaryconditions_inlet": "boundaryconditions.type[0] === \"Inlet\"",
-               "boundaryconditions_outlet": "boundaryconditions.type[0] === \"Outlet\"",
-               "boundaryconditions_outlet_windkessel": "boundaryconditions.type[0] === \"Outlet\" && boundaryconditions_outlet.model[0] === \"Windkessel\""
-           }
-       },
-       "boundaryconditions_velocityImposed":
-       {
-           "label": "Velocity_Imposed",
-	   "parameters": [
-               { "id":"expr", "type":"string","size": 1 }
-           ]
-       },
-       "boundaryconditions_inlet":
-       {
-           "label": "Inlet",
-	   "parameters": [
-               { "id":"profile", "type":"string", "ui":"enum","noEmpty": 1,"size": 1,
-                 "default": ["parabolic"],
-                 "domain"   : {
-                     "Parabolic": "parabolic",
-                     "Constant": "constant"
-                 }
-               },
-               { "id":"control", "type":"string", "ui":"enum","noEmpty": 1,"size": 1,
-                 "default": ["VelocityMax"],
-                 "domain"   : {
-                     "Velocity Max": "VelocityMax",
-                     "Flow Rate": "FlowRate"
-                 }
-               },
-               { "id":"expr", "type":"string","size": 1 }
-           ]
-       },
-       "boundaryconditions_outlet":
-       {
-           "label": "Outlet",
-	   "parameters": [
-               { "id":"model", "type":"string", "ui":"enum","noEmpty": 1,"size": 1,
-                 "default": ["Free"],
-                 "domain"   : {
-                     "Free": "Free",
-                     "Windkessel": "Windkessel"
-                 }
-               }
-           ]
-       },
-       "boundaryconditions_outlet_windkessel":
-       {
-           "label": "Outlet windkessel",
-	   "parameters": [
-               { "id":"Rd", "type":"double","size": 1 },
-               { "id":"Rp", "type":"double","size": 1 },
-               { "id":"Cd", "type":"double","size": 1 },
-               { "id":"coupling", "type":"string", "ui":"enum","noEmpty": 1,"size": 1,
-                 "default": ["Implicit"],
-                 "domain"   : {
-                     "Implicit": "implicit",
-                     "Explicit": "explicit"
-                 }
-               }
-           ]
-       },
-
-       "volumicforces":
-       {
-           "label": "Volumic forces",
-           "parameters": [
-               { "id":"marker", "type":"string","size": 1 },
-               { "id":"expr", "ui":"list" }
-	   ]
-       },
-
-       "postprocess_measures":
-       {
-           "parameters": [
-               { "id":"name", "type":"string","size": 1 },
-               { "id":"type", "type":"string", "ui":"enum","noEmpty": 1,"size": 1,
-                 "default": ["Statistics"],
-                 "domain"   : {
-                     "Statistics": "Statistics",
-                     "Norm": "Norm",
-		     "Points": "Points",
-		     "Forces": "Foce",
-		     "FlowRate": "FlowRate",
-		     "Pressure": "Pressure",
-		     "VelocityDivergence": "VelocityDivergence" 
-                 }
-               },
-	       ["Measures_Points", "Measures_Forces", "Measures_FlowRate"]
-           ],
-	   "children": {
-	       "Measures_Points": "postprocess_measures.type[0] === \"Points\"",
-	       "Measures_Forces": "postprocess_measures.type[0] === \"Forces\"",
-	       "Measures_FlowRate": "postprocess_measures.type[0] === \"FlowRate\""
-	   }
-       },
-       "Measures_Points":
+	"boundaryconditions":
 	{
-	   "label": "Measures_Points",
-	   "parameters": [
-	       { "id":"tag", "type":"string","size": 1 },
-	       { "id":"coord", "type":"string","size": 3, "default": ["x", "y", "z"] },
-	       { "id":"fields", "type":"string","ui":"enum","noEmpty": 1,"size": 1,
-                 "default": ["Velocity"],
-                 "domain"   : {
-                     "Pressure": "pressure",
-		     "Velocity": "velocity" 
-                 }
-               }
-	   ]
-       },
-       "Measures_Forces":
-       {
-	   "label": "Measures_Forces",
-	   "parameters": [
-	       { "id":"markers", "ui":"list" }
-	   ]
-       },
-       "Measures_FlowRate":
-       {
-	   "label": "Measures_FlowRate",
-	   "parameters": [
-	       { "id":"tag", "type":"string","size": 1 },
-	       { "id":"marker", "type":"string","size": 1 },
-	       { "id":"direction", "type":"string","ui":"enum","noEmpty": 1,"size": 1,
-                 "default": ["Exterior"],
-                 "domain"   : {
-                     "Interior": "interior_normal",
-		     "Exterior": "exterior_normal" 
-                 }
-               }
-	   ]
-       },
+            "label": "Assign Boundary Conditions",
+	    "parameters": [
+		{ "id":"name", "type":"string","size": 1 },
+		{ "id":"markers", "ui":"list" },
+		{ "id":"type",
+		  "type":"string",
+		  "ui":"enum",
+		  "noEmpty": 1,
+		  "size": 1,
+                  "default": ["Velocity_Imposed"],
+                  "domain"   : {
+                      "Velocity Imposed": "Velocity_Imposed",
+                      "Neumann": "Neumann",
+                      "Inlet": "Inlet",
+                      "Outlet": "Outlet"
+                  }
+		},
+		["boundaryconditions_velocityImposed","boundaryconditions_inlet","boundaryconditions_outlet","boundaryconditions_outlet_windkessel"]
+            ],
+            "children": {
+		"boundaryconditions_velocityImposed": "boundaryconditions.type[0] === \"Velocity_Imposed\"",
+		"boundaryconditions_inlet": "boundaryconditions.type[0] === \"Inlet\"",
+		"boundaryconditions_outlet": "boundaryconditions.type[0] === \"Outlet\"",
+		"boundaryconditions_outlet_windkessel": "boundaryconditions.type[0] === \"Outlet\" && boundaryconditions_outlet.model[0] === \"Windkessel\""
+            }
+	},
+	"boundaryconditions_velocityImposed":
+	{
+            "label": "Velocity_Imposed",
+	    "parameters": [
+		{ "id":"expr", "type":"string","size": 1 }
+            ]
+	},
+	"boundaryconditions_inlet":
+	{
+            "label": "Inlet",
+	    "parameters": [
+		{ "id":"profile", "type":"string", "ui":"enum","noEmpty": 1,"size": 1,
+                  "default": ["parabolic"],
+                  "domain"   : {
+                      "Parabolic": "parabolic",
+                      "Constant": "constant"
+                  }
+		},
+		{ "id":"control", "type":"string", "ui":"enum","noEmpty": 1,"size": 1,
+                  "default": ["VelocityMax"],
+                  "domain"   : {
+                      "Velocity Max": "VelocityMax",
+                      "Flow Rate": "FlowRate"
+                  }
+		},
+		{ "id":"expr", "type":"string","size": 1 }
+            ]
+	},
+	"boundaryconditions_outlet":
+	{
+            "label": "Outlet",
+	    "parameters": [
+		{ "id":"model", "type":"string", "ui":"enum","noEmpty": 1,"size": 1,
+                  "default": ["Free"],
+                  "domain"   : {
+                      "Free": "Free",
+                      "Windkessel": "Windkessel"
+                  }
+		}
+            ]
+	},
+	"boundaryconditions_outlet_windkessel":
+	{
+            "label": "Outlet windkessel",
+	    "parameters": [
+		{ "id":"Rd", "type":"double","size": 1 },
+		{ "id":"Rp", "type":"double","size": 1 },
+		{ "id":"Cd", "type":"double","size": 1 },
+		{ "id":"coupling", "type":"string", "ui":"enum","noEmpty": 1,"size": 1,
+                  "default": ["Implicit"],
+                  "domain"   : {
+                      "Implicit": "implicit",
+                      "Explicit": "explicit"
+                  }
+		}
+            ]
+	},
+
+	"volumicforces":
+	{
+            "label": "Volumic forces",
+            "parameters": [
+		{ "id":"marker", "type":"string","size": 1 },
+		{ "id":"expr", "ui":"list" }
+	    ]
+	},
+
+	"postprocess_measures":
+	{
+            "parameters": [
+		{ "id":"name", "type":"string","size": 1 },
+		{ "id":"type", "type":"string", "ui":"enum","noEmpty": 1,"size": 1,
+                  "default": ["Statistics"],
+                  "domain"   : {
+                      "Statistics": "Statistics",
+                      "Norm": "Norm",
+		      "Points": "Points",
+		      "Forces": "Foce",
+		      "FlowRate": "FlowRate",
+		      "Pressure": "Pressure",
+		      "VelocityDivergence": "VelocityDivergence" 
+                  }
+		},
+		["Measures_Points", "Measures_Forces", "Measures_FlowRate"]
+            ],
+	    "children": {
+		"Measures_Points": "postprocess_measures.type[0] === \"Points\"",
+		"Measures_Forces": "postprocess_measures.type[0] === \"Forces\"",
+		"Measures_FlowRate": "postprocess_measures.type[0] === \"FlowRate\""
+	    }
+	},
+	"Measures_Points":
+	{
+	    "label": "Measures_Points",
+	    "parameters": [
+		{ "id":"tag", "type":"string","size": 1 },
+		{ "id":"coord", "type":"string","size": 3, "default": ["x", "y", "z"] },
+		{ "id":"fields", "type":"string","ui":"enum","noEmpty": 1,"size": 1,
+                  "default": ["Velocity"],
+                  "domain"   : {
+                      "Pressure": "pressure",
+		      "Velocity": "velocity" 
+                  }
+		}
+	    ]
+	},
+	"Measures_Forces":
+	{
+	    "label": "Measures_Forces",
+	    "parameters": [
+		{ "id":"markers", "ui":"list" }
+	    ]
+	},
+	"Measures_FlowRate":
+	{
+	    "label": "Measures_FlowRate",
+	    "parameters": [
+		{ "id":"tag", "type":"string","size": 1 },
+		{ "id":"marker", "type":"string","size": 1 },
+		{ "id":"direction", "type":"string","ui":"enum","noEmpty": 1,"size": 1,
+                  "default": ["Exterior"],
+                  "domain"   : {
+                      "Interior": "interior_normal",
+		      "Exterior": "exterior_normal" 
+                  }
+		}
+	    ]
+	},
 	
-       "postprocess_exports":
-       {
-           "parameters": [
-               { "id":"type", "type":"string", "ui":"enum","noEmpty": 1,"size": -1,
-                 "default": ["Velocity"],
-                 "domain"   : {
-                     "Velocity": "Velocity",
-                     "Pressure": "Pressure",
-		     "Displacement": "displacement",
-		     "vorticity": "vorticity",
-		     "stress": "stress",
-		     "normal-stress": "normal-stress",
-		     "wall-shear-stress": "wall-shear-stress",
-		     "density": "density",
-		     "viscosity": "viscosity",
-		     "pid": "pid",
-		     "alemesh": "alemesh"
-                 }
-               }
+	"postprocess_exports":
+	{
+            "parameters": [
+		{ "id":"type", "type":"string", "ui":"enum","noEmpty": 1,"size": -1,
+                  "default": ["Velocity"],
+                  "domain"   : {
+                      "Velocity": "Velocity",
+                      "Pressure": "Pressure",
+		      "Displacement": "displacement",
+		      "vorticity": "vorticity",
+		      "stress": "stress",
+		      "normal-stress": "normal-stress",
+		      "wall-shear-stress": "wall-shear-stress",
+		      "density": "density",
+		      "viscosity": "viscosity",
+		      "pid": "pid",
+		      "alemesh": "alemesh"
+                  }
+		}
 
-           ]
-       }
+            ]
+	}
 
 
-   }
+    }
 }

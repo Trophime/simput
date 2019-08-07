@@ -8,6 +8,8 @@ return simputConvert(dataModel, mapping, output);
 };
 */
 
+console.log('Feelpp-toolbox-fluid', 'convert.js');
+
 var template = require('./templates/cfg.hbs');
 
 function initJsonSection( section, subsection, jsonInOut )
@@ -24,11 +26,24 @@ module.exports = function(dataModel) {
     //output['myvvdata.json'] = (m) => JSON.stringify(m, null, 2);
 
     console.log('dataModel:', dataModel);
+    console.log('dataModel.data:', dataModel.data);
 
     //var mjson = { models: { name:dataModel.data.models[0].models.name.value[0] } };
 
     var jsonSectionModels = {};
     if ( dataModel.data.models )
+	dataModel.data.models.forEach((attributes) => {
+	    const model_att = {};
+	    Object.keys(attributes.models).forEach((fieldName) => {
+		const value = attributes.models[fieldName].value;
+		if (value.length === 1) {
+		    model_attr[fieldName] = value[0];
+		} else {
+		    model_attr[fieldName] = value;
+		}
+	    });
+	    console.log(model_attr);
+	});	
         jsonSectionModels.equations = dataModel.data.models[0].models.name.value[0];
     else
         jsonSectionModels.equations = "Navier-Stokes";
