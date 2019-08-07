@@ -25,14 +25,17 @@ module.exports = function(dataModel) {
     //const output = {};
     //output['myvvdata.json'] = (m) => JSON.stringify(m, null, 2);
 
-    console.log('dataModel:', dataModel);
-    console.log('dataModel.data:', dataModel.data);
+    console.log('dataModel:');
+    console.log(dataModel);
+    console.log('dataModel.data:')
+    console.log(dataModel.data);
 
     //var mjson = { models: { name:dataModel.data.models[0].models.name.value[0] } };
 
     var jsonSectionModels = {};
     if ( dataModel.data.models )
     {
+	console.log('dataModel.data.models atrributes:')
 	dataModel.data.models.forEach((attributes) => {
 	    const model_att = {};
 	    Object.keys(attributes.models).forEach((fieldName) => {
