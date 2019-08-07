@@ -85,16 +85,24 @@
             "label": "Feelpp Toolbox Fluid Discretization",
 	    "parameters": [
                 {
-                    "id":"dim","type":"string","ui":"enum",
-                    "noEmpty": 1,"size"   : 1,"default": ["3D"],
+                    "id":"dim",
+		    "type":"string",
+		    "ui":"enum",
+                    "noEmpty": 1,
+		    "size"   : 1,
+		    "default": ["3D"],
                     "domain"   : {
                         "2D": "2D",
                         "3D": "3D"
                     }
                 },
                 {
-                    "id":"discretization","type":"string","ui":"enum",
-                    "noEmpty": 1,"size"   : 1,"default": ["P2P1G1"],
+                    "id":"discretization",
+		    "type":"string",
+		    "ui":"enum",
+                    "noEmpty": 1,
+		    "size"   : 1,
+		    "default": ["P2P1G1"],
                     "domain"   : {
                         "P2P1G1": "P2P1G1",
                         "P2P1G2": "P2P1G2"

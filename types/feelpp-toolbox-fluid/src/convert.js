@@ -20,66 +20,23 @@ function initJsonSection( section, subsection, jsonInOut )
         jsonInOut[section][subsection] = {};
 }
 
-function displayField(item, fieldName)
-{
-    const value = attributes.models[fieldName].value;
-    if (value.length === 1) {
-	model_attr[fieldName] = value[0];
-    } else {
-	model_attr[fieldName] = value;
-    }
-}
-
-function displayAttributes(item)
-{
-    console.log('displayAttributes:')
-    console.log(item)
-    // const model_att = {};
-    Object.keys(item).forEach((fieldName) => {
-	const value = item[fieldName].value;
-	console.log('fieldName:', fieldName);
-	console.log('value:', value);
-	// if (value.length === 1) {
-	//     model_attr[fieldName] = value[0];
-	// } else {
-	//     model_attr[fieldName] = value;
-	// }
-    });
-    // console.log(model_attr);
-}
-
 module.exports = function(dataModel) {
 
     //const output = {};
     //output['myvvdata.json'] = (m) => JSON.stringify(m, null, 2);
 
     console.log('dataModel:' + JSON.stringify(dataModel) );
-    console.dir(dataModel, {depth: null, colors: true});
 
     //var mjson = { models: { name:dataModel.data.models[0].models.name.value[0] } };
-    if ( dataModel.data.discretization )
-    {
-	console.log('dataModel.data.discretization:');
-	console.log(dataModel.data.discretization);
-	console.log('dataModel.data.discretization attributes');
-	dataModel.data.models.forEach(displayAttributes);	
-    }
-    if ( dataModel.data.models )
-    {
-	console.log('dataModel.data.models:')
-	console.log(dataModel.data.discretization);
-	console.log('dataModel.data.models attributes');
-	dataModel.data.models.forEach(displayAttributes);	
-    }
-    
     var jsonSectionModels = {};
     if ( dataModel.data.models )
     {
+	console.log('dataModel.data.models (type):');
+	console.log( typeof( dataModel.data.models) );
         jsonSectionModels.equations = dataModel.data.models[0].models.name.value[0];
     }
     else
         jsonSectionModels.equations = "Navier-Stokes";
-    console.log('jsonSectionModels:', jsonSectionModels);
 
     var jsonSectionParameters = {};
     if ( dataModel.data.parameters ) {
@@ -90,7 +47,6 @@ module.exports = function(dataModel) {
             }
         }
     }
-    console.log('jsonSectionParameters:', jsonSectionParameters);
     
     var jsonSectionMaterials = {};
     if ( dataModel.data.materials ) {
@@ -118,7 +74,6 @@ module.exports = function(dataModel) {
             jsonSectionMaterials[matName] = jsonCurrentMaterial;        
         }
     }
-    console.log('jsonSectionMaterials:', jsonSectionMaterials);
 
     var jsonSectionBoundaryConditions = {};
     if ( dataModel.data.boundaryconditions ) {
@@ -167,7 +122,6 @@ module.exports = function(dataModel) {
             }
         }
     }
-    console.log('jsonBoundaryConditions:', jsonSectionBoundaryConditions);
 
     var jsonSectionPostProcess = {};
 
@@ -180,8 +134,10 @@ module.exports = function(dataModel) {
                            } ;
     
     console.log('jsonAllSections:', jsonAllSections);
-    console.log('output cfg:', template({ models: { name:jsonSectionModels.equations } }) );
-    console.log('output json:', JSON.stringify(jsonAllSections, null, 2) );
+    console.log('output cfg:')
+    console.log(template({ models: { name:jsonSectionModels.equations } }) );
+    console.log('output json:')
+    console.log(JSON.stringify(jsonAllSections, null, 2) );
 
     
     return {
