@@ -20,23 +20,24 @@ function initJsonSection( section, subsection, jsonInOut )
         jsonInOut[section][subsection] = {};
 }
 
+function isEmpty(obj) {
+    return Object.keys(obj).length === 0;
+}
+
 module.exports = function(dataModel) {
 
     //const output = {};
     //output['myvvdata.json'] = (m) => JSON.stringify(m, null, 2);
 
-    console.log('dataModel:' + JSON.stringify(dataModel) );
+    console.log('dataModel:' + JSON.stringify(dataModel, null,2) );
+    console.log(dataModel.data.models);
 
     //var mjson = { models: { name:dataModel.data.models[0].models.name.value[0] } };
     var jsonSectionModels = {};
-    if ( dataModel.data.models )
-    {
-	console.log('dataModel.data.models (type):');
-	console.log( typeof( dataModel.data.models) );
-        jsonSectionModels.equations = dataModel.data.models[0].models.name.value[0];
-    }
+    if ( isEmpty(dataModel.data.models) )
+        jsonSectionModels.equations = "Navier-Stokes-Def";
     else
-        jsonSectionModels.equations = "Navier-Stokes";
+	jsonSectionModels.equations = dataModel.data.models[0].models.name.value[0];
 
     var jsonSectionParameters = {};
     if ( dataModel.data.parameters ) {
@@ -133,10 +134,9 @@ module.exports = function(dataModel) {
                              PostProcess:jsonSectionPostProcess
                            } ;
     
-    console.log('jsonAllSections:', jsonAllSections);
-    console.log('output cfg:')
+    console.log('=== output cfg ===')
     console.log(template({ models: { name:jsonSectionModels.equations } }) );
-    console.log('output json:')
+    console.log('=== output json ===')
     console.log(JSON.stringify(jsonAllSections, null, 2) );
 
     
