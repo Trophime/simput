@@ -53,10 +53,8 @@ module.exports = function(dataModel) {
     //const output = {};
     //output['myvvdata.json'] = (m) => JSON.stringify(m, null, 2);
 
-    console.log('dataModel:');
-    console.log(dataModel);
-    console.log('dataModel.data:');
-    console.log(dataModel.data);
+    console.log('dataModel:' + JSON.stringify(dataModel) );
+    console.dir(dataModel, {depth: null, colors: true});
 
     //var mjson = { models: { name:dataModel.data.models[0].models.name.value[0] } };
     if ( dataModel.data.discretization )
