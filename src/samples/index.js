@@ -54,7 +54,7 @@ export default [
   },
   {
     label: 'ParFlow CONUS',
-    icon: flight,
+    icon: 'flight',
     description: 'ParaFlow is a parallel ground water simulation code while CONUS stands for Continental US.',
     acknowledgement: 'Example by Kitware Inc.',
     model: {
