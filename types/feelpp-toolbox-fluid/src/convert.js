@@ -35,7 +35,7 @@ module.exports = function(dataModel) {
     //var mjson = { models: { name:dataModel.data.models[0].models.name.value[0] } };
     var jsonSectionModels = {};
     if ( isEmpty(dataModel.data.models) )
-        jsonSectionModels.equations = "Navier-Stokes-Def";
+        jsonSectionModels.equations = dataModel.data.models[0].models.name.default[0];
     else
 	jsonSectionModels.equations = dataModel.data.models[0].models.name.value[0];
 
@@ -48,8 +48,8 @@ module.exports = function(dataModel) {
 	jsonSectionMain.directory = dataModel.data.geometry[0].geometry.directory.value[0];
 	jsonSectionMain.model = dataModel.data.geometry[0].geometry.filename.value[0];
 	jsonSectionMain.geo = dataModel.data.geometry[0].geometry.geofilename.value[0];
-	jsonSectionMain.hsize = dataModel.data.geometry[0].geometry.gmsh.hsize.value[0];
-	jsonSectionMain.scale = dataModel.data.geometry[0].geometry.gmsh.scale.value[0];
+	jsonSectionMain.hsize = dataModel.data.geometry[0].geometry.gmsh_hsize.value[0];
+	jsonSectionMain.scale = dataModel.data.geometry[0].geometry.gmsh_scale.value[0];
     }
     
     if ( isEmpty(dataModel.data.discretization) )
@@ -69,7 +69,7 @@ module.exports = function(dataModel) {
 	jsonSectionMain.time = dataModel.data.solver[0].solver.time.value[0];
 	if ( jsonSectionMain.time )
 	{
-	    jsonSectionMain.bdforder = dataModel.data.solver[0].solver.bdf.order.value[0];
+	    jsonSectionMain.bdforder = dataModel.data.solver[0].solver.bdforder.value[0];
 	    jsonSectionMain.time_step = dataModel.data.solver[0].solver.time_step.value[0];
 	    jsonSectionMain.time_final = dataModel.data.solver[0].solver.time_final.value[0];
 	}
