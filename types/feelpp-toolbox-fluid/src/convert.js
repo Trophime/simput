@@ -35,7 +35,7 @@ module.exports = function(dataModel) {
     //var mjson = { models: { name:dataModel.data.models[0].models.name.value[0] } };
     var jsonSectionModels = {};
     if ( isEmpty(dataModel.data.models) )
-        jsonSectionModels.equations = dataModel.data.models[0].models.name.default[0];
+        jsonSectionModels.equations = "Navier-Stokes";
     else
 	jsonSectionModels.equations = dataModel.data.models[0].models.name.value[0];
 

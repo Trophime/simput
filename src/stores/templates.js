@@ -1,3 +1,4 @@
+import { saveAs } from 'file-saver';
 import JSZip from 'jszip';
 import Vue from 'vue';
 import { Mutations, Actions } from 'simput/src/stores/types';
@@ -91,28 +92,16 @@ export default {
           : output.errors;
 
       if (!hasError) {
+        console.log(JSON.stringify(output.model, null, 2));
         const zip = new JSZip();
         zip.file('.simput.model', JSON.stringify(output.model));
         const files = output.results;
         Object.keys(files).forEach((fileName) => {
           zip.file(fileName, files[fileName]);
         });
-        zip
-          .generateAsync({
-            type: 'blob',
-            compression: 'DEFLATE',
-            compressionOptions: {
-              level: compressionLevel,
-            },
-          })
-          .then((blob) => {
-            const url = URL.createObjectURL(blob);
-            const anchor = document.createElement('a');
-            anchor.setAttribute('href', url);
-            anchor.setAttribute('download', outputFileName);
-            anchor.click();
-            setTimeout(() => URL.revokeObjectURL(url), 60000);
-          });
+        zip.generateAsync({ type: 'blob' }).then((blob) => {
+          saveAs(blob, outputFileName);
+        });
       }
     },
   },
